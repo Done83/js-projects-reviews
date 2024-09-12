@@ -1,4 +1,53 @@
+import { useState } from "react";
+import { FaChevronLeft, FaChevronRight, FaQuoteRight } from "react-icons/fa";
+import reviews from "./data";
+
 const App = () => {
-  return <h2>Reviews Starter</h2>;
+  const [index, setIndex] = useState(0);
+  const { name, job, image, text } = reviews[index];
+
+  const prevPerson = () => {
+    if (index === 0) {
+      setIndex(reviews.length - 1);
+      return;
+    }
+    setIndex((prevIndex) => {
+      let newIndex = prevIndex - 1;
+      return newIndex;
+    });
+  };
+  const nextPerson = () => {
+    if (index === reviews.length - 1) {
+      setIndex(0);
+      return;
+    }
+    setIndex((prevIndex) => {
+      let newIndex = prevIndex + 1;
+      return newIndex;
+    });
+  };
+  return (
+    <main>
+      <article className="review">
+        <div className="img-container">
+          <img src={image} alt={name} className="person-img" />
+          <span className="quote-icon">
+            <FaQuoteRight />
+          </span>
+        </div>
+        <h4 className="author">{name}</h4>
+        <p className="job">{job}</p>
+        <p className="info">{text}</p>
+        <div className="btn-container">
+          <button type="button" className="prev-btn" onClick={prevPerson}>
+            <FaChevronLeft />
+          </button>
+          <button type="button" className="next-btn" onClick={nextPerson}>
+            <FaChevronRight />
+          </button>
+        </div>
+      </article>
+    </main>
+  );
 };
 export default App;
