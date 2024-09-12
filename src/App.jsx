@@ -30,7 +30,7 @@ const App = () => {
   const randomPerson = () => {
     let randomIndex = Math.floor(Math.random() * reviews.length);
     if (randomIndex === index) {
-      randomIndex = index + 1;
+      randomIndex = Math.floor(Math.random() * reviews.length);
     }
     setIndex(randomIndex);
   };
